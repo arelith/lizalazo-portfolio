@@ -1,0 +1,615 @@
+/* ==========================================================================
+   Sections — header + hero (первый экран)
+   Все значения — через токены из tokens.css.
+   ========================================================================== */
+
+/* ============================ Site header ============================ */
+.site-header {
+  padding-top: var(--header-padding-top);
+}
+
+/* Десктоп: сетка 5 колонок (лого + 4 пункта), зазор из макета */
+.site-header__inner {
+  display: grid;
+  grid-template-columns: repeat(var(--nav-columns), 1fr);
+  column-gap: var(--nav-column-gap);
+  align-items: start;
+}
+
+.site-header__logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Логотип. Это не <img>, а закрашенная маска: так знак перекрашивается
+   токеном (на hover — акцентный синий), а не остаётся картинкой с зашитым
+   в файл цветом. Форму задаёт альфа-канал name.svg, его fill не участвует.
+   Шапка и футер используют один и тот же знак. */
+.site-logo {
+  display: block;
+  width: var(--logo-width);
+  height: var(--logo-height);
+  background-color: var(--color-text);
+  -webkit-mask: url("../assets/svg/name.svg") no-repeat center / contain;
+  mask: url("../assets/svg/name.svg") no-repeat center / contain;
+  transition: background-color var(--transition-base);
+}
+
+@media (hover: hover) {
+  .site-header__logo:hover .site-logo,
+  .site-footer__logo:hover .site-logo {
+    background-color: var(--color-accent);
+  }
+}
+
+/* Тач — обратная связь на нажатии, как у остальных ссылок */
+@media (hover: none) {
+  .site-header__logo:active .site-logo,
+  .site-footer__logo:active .site-logo {
+    background-color: var(--color-accent);
+  }
+}
+
+/* На десктопе обёртки «растворяются», и пункты становятся ячейками сетки */
+.site-nav,
+.site-nav__list {
+  display: contents;
+}
+
+/* flex убирает лишний базовый интерлиньяж под инлайновой ссылкой */
+.site-nav__list > li {
+  display: flex;
+}
+
+/* Бургер, крестик и затемнение на десктопе не нужны */
+.burger,
+.site-nav__panel-head,
+.site-nav__scrim {
+  display: none;
+}
+
+/* ============================ Hero ============================ */
+.hero {
+  position: relative;
+  max-width: var(--hero-max-width);
+  margin-top: var(--hero-offset-top);
+}
+
+.hero__title {
+  font-size: var(--font-size-h1);          /* 20px */
+  line-height: var(--line-height-20);
+  color: var(--color-text);
+}
+
+.hero__description {
+  margin-top: var(--hero-text-gap);
+  font-size: var(--font-size-small);       /* 12px */
+  line-height: var(--line-height-12);
+  color: var(--color-text-secondary);
+}
+
+/* Рукописная линия под словом «впервые» — декор.
+   Позиционируется абсолютно относительно .hero. */
+.hero__underline {
+  position: absolute;
+  left: var(--hero-underline-left);
+  top: var(--hero-underline-top);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Рукописная пометка — декор.
+   Позиционируется абсолютно относительно .hero, наклон — в CSS. */
+.hero__note {
+  position: absolute;
+  top: var(--hero-note-top);
+  left: var(--hero-note-left);
+  rotate: var(--note-rotate);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* ============================ Cases ============================ */
+.section {
+  margin-top: var(--section-gap);
+}
+
+.section__content {
+  margin-top: var(--section-content-gap);
+}
+
+/* Две карточки в ряд; ниже 768px — одна колонка */
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--cases-gap);
+}
+
+/* ============================ Side quests ============================ */
+.section--spaced {
+  margin-top: var(--section-gap-lg);
+}
+
+/* Крупные проекты — два в ряд, как кейсы */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--projects-gap);
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.project-card__pic {
+  position: relative;
+  height: var(--project-pic-height);
+  overflow: hidden;
+  background-color: var(--color-surface);
+}
+
+/* Экран сдвинут от центра панели и обрезается её краями */
+.project-card__screen {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: calc(-50% + var(--project-screen-offset-x))
+    calc(-50% + var(--project-screen-offset-y));
+  width: var(--project-screen-width);
+  height: var(--project-screen-height);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.project-card__screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Второй проект — экран сдвинут в другую сторону */
+.project-card--shift-right {
+  --project-screen-offset-x: var(--project-screen-offset-x-alt);
+}
+
+/* ---------------- Коллаж ----------------
+   Десктоп: сетка 5 колонок × 3 ряда. Колонки 272 / 96 / 272 / 272 / 272
+   при зазоре 12 дают ровно 1232 (широкая плитка = 272 + 12 + 96 = 380).
+   Обёртки ленты «растворяются», плитки становятся ячейками сетки. */
+.collage {
+  margin-top: var(--collage-offset);
+  display: grid;
+  grid-template-columns:
+    var(--collage-unit) var(--collage-col-narrow)
+    var(--collage-unit) var(--collage-unit) var(--collage-unit);
+  grid-template-rows: repeat(3, var(--collage-unit));
+  gap: var(--collage-gap);
+  /* если сетка не влезает по ширине — прокручивается внутри себя,
+     страница горизонтально не едет */
+  overflow-x: auto;
+}
+
+.collage__scroll,
+.collage__strip {
+  display: contents;
+}
+
+.collage__tile {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  background-color: var(--color-surface);
+}
+
+/* Картинка центрируется в плитке; высота задаётся долей от плитки,
+   ширина считается сама из пропорций файла */
+.collage__tile img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  width: auto;
+  height: var(--tile-img-height);
+  max-width: none;
+  border-radius: var(--radius-24);
+}
+
+/* Светлые скриншоты сливаются с белым фоном страницы — как в макете им нужна
+   рамка, тот же приём, что у экранов в карточках кейсов. Радиус у них крупнее
+   базового (34 против 24). */
+.collage__tile--respon img,
+.collage__tile--52days img,
+.collage__tile--75hour img {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-34);
+}
+
+/* Под eilish.png (экран звонка с прозрачными скруглёнными углами) — сплошная
+   подложка цвета из макета. Радиус 34 держит и клип картинки, и подложку:
+   background-color лежит на самом img. */
+.collage__tile--eilish img {
+  background-color: var(--color-eilish-bg);
+  border-radius: var(--radius-34);
+}
+
+/* Раскладка и размер картинки по каждой плитке */
+.collage__tile--navi {
+  grid-column: 1 / 3;
+  grid-row: 1;
+  --tile-img-height: 50%;
+}
+
+.collage__tile--robert {
+  grid-column: 3;
+  grid-row: 1;
+  --tile-img-height: 73.53%;
+}
+
+.collage__tile--52days {
+  grid-column: 4;
+  grid-row: 1;
+  --tile-img-height: 73.53%;
+}
+
+.collage__tile--75hour {
+  grid-column: 5;
+  grid-row: 1;
+  --tile-img-height: 73.53%;
+}
+
+.collage__tile--respon {
+  grid-column: 1;
+  grid-row: 2;
+  --tile-img-height: 73.53%;
+}
+
+.collage__tile--eilish {
+  grid-column: 1;
+  grid-row: 3;
+  --tile-img-height: 73.53%;
+}
+
+.collage__tile--currenc {
+  grid-column: 4 / 6;
+  grid-row: 2 / 4;
+  --tile-img-height: 80%;
+}
+
+/* music выше своей плитки и обрезается снизу — не центрируем по вертикали */
+.collage__tile--music {
+  grid-column: 2 / 4;
+  grid-row: 2 / 4;
+  --tile-img-height: 105.58%;
+}
+
+.collage__tile--music img {
+  top: 10%;
+  translate: -50% 0;
+}
+
+/* ============================ Обо мне ============================ */
+.about__text {
+  position: relative;
+  max-width: var(--about-text-width);
+}
+
+.about__paragraph {
+  margin: 0;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-16);
+  color: var(--color-text);
+}
+
+/* Рукописная пометка внутри абзаца — декор.
+   Координаты из макета, наклон и позиция только в CSS. */
+.about__note {
+  position: absolute;
+  left: var(--about-note-left);
+  top: var(--about-note-top);
+  rotate: var(--about-note-rotate);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Лента фото — та же механика, что у коллажа в сайд квестах */
+.about__scroll {
+  margin-top: var(--collage-offset);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.about__scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.about__strip {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--about-strip-gap);
+  width: max-content;
+}
+
+/* ============================ Футер ============================ */
+.site-footer {
+  margin-top: var(--footer-gap);
+  padding-bottom: var(--footer-padding-bottom);
+}
+
+/* Десктоп: та же сетка 5 колонок, что и в шапке */
+.site-footer__inner {
+  display: grid;
+  grid-template-columns: repeat(var(--nav-columns), 1fr);
+  column-gap: var(--nav-column-gap);
+  align-items: start;
+}
+
+.site-footer__logo {
+  display: inline-flex;
+  align-items: center;
+}
+
+.site-footer__list {
+  display: contents;
+}
+
+.site-footer__list > li {
+  display: flex;
+}
+
+/* ==========================================================================
+   Mobile ≤768px — навигация сворачивается в бургер
+   ========================================================================== */
+@media (max-width: 768px) {
+  :root {
+    --header-padding-top: var(--space-16);
+    --hero-offset-top: 31px;
+    --hero-text-gap: var(--space-16);
+    --hero-underline-left: 133px;
+    --hero-underline-top: 81px;
+    --section-gap: 60px;
+    --section-content-gap: var(--space-24);
+    --cases-gap: var(--space-32);
+
+    /* Крупные проекты */
+    --project-pic-height: 320px;
+    --project-screen-width: 383px;
+    --project-screen-height: 320px;
+    --project-screen-offset-x: -44px;
+    --project-screen-offset-x-alt: -44px;  /* на мобиле оба одинаково */
+    --project-screen-offset-y: 24px;
+    --projects-gap: var(--space-32);
+
+    /* Коллаж */
+    --collage-unit: 200px;
+    --collage-unit-wide: 279px;
+    --collage-block-height: 320px;
+    --collage-offset: var(--space-32);
+
+    /* Обо мне и футер */
+    --about-note-left: 83.38%;   /* 286 из 343 в мобильном макете */
+    --about-note-top: 94px;
+    --footer-gap: 60px;
+    --footer-padding-bottom: 46px;
+  }
+
+  /* Карточки в одну колонку */
+  .cases-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* ---------------- Side quests на мобиле ---------------- */
+  .section--spaced {
+    margin-top: var(--section-gap);
+  }
+
+  /* Крупные проекты — в одну колонку */
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* По макету это название переносится на две строки */
+  .project-card__title--narrow {
+    width: var(--project-title-narrow);
+    white-space: normal;
+  }
+
+  /* ---------------- Обо мне на мобиле ---------------- */
+  .about__text {
+    max-width: none;
+  }
+
+  /* Лента выходит к краям экрана, как коллаж */
+  .about__scroll {
+    margin-inline: calc(var(--container-gutter) * -1);
+    padding-inline: var(--container-gutter);
+  }
+
+  /* ---------------- Футер на мобиле ---------------- */
+  /* Лого слева, контакты колонкой справа */
+  .site-footer__inner {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .site-footer__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--footer-item-gap);
+    width: var(--footer-contacts-width);
+  }
+
+  /* Коллаж: лента со свайпом + два широких блока под ней */
+  .collage {
+    display: flex;
+    flex-direction: column;
+    gap: var(--collage-gap);
+    overflow: visible;
+  }
+
+  /* Полоса прокрутки. Отрицательные поля выводят ленту к краям экрана,
+     внутренние padding'и держат первую и последнюю плитку по контейнеру.
+     Ширина полосы равна ширине экрана, поэтому страница вбок не едет. */
+  .collage__scroll {
+    display: block;
+    overflow-x: auto;
+    margin-inline: calc(var(--container-gutter) * -1);
+    padding-inline: var(--container-gutter);
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .collage__scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Лента: в строку, без переносов */
+  .collage__strip {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--collage-gap);
+    width: max-content;
+  }
+
+  .collage__strip .collage__tile {
+    flex: 0 0 auto;
+    width: var(--collage-unit);
+    height: var(--collage-unit);
+  }
+
+  .collage__strip .collage__tile--navi {
+    width: var(--collage-unit-wide);
+  }
+
+  /* Широкие блоки под лентой */
+  .collage__tile--currenc,
+  .collage__tile--music {
+    width: 100%;
+    height: var(--collage-block-height);
+  }
+
+  .collage__tile--music {
+    --tile-img-height: 123.44%;
+  }
+
+  /* Хедер в строку: лого слева, бургер справа */
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  /* Кнопка-бургер */
+  .burger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--burger-size);
+    height: var(--burger-size);
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  /* Затемнение под панелью */
+  .site-nav__scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background-color: var(--scrim-color);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-base),
+      visibility var(--transition-base);
+    z-index: 10;
+  }
+
+  /* Выезжающая панель меню */
+  .site-nav {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: var(--menu-width);
+    max-width: 100%;
+    padding: var(--menu-padding);
+    background-color: var(--color-bg);
+    translate: 100% 0;
+    visibility: hidden;
+    transition: translate var(--transition-base),
+      visibility var(--transition-base);
+    z-index: 11;
+  }
+
+  /* Шапка панели с крестиком */
+  .site-nav__panel-head {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .site-nav__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--burger-size);
+    height: var(--burger-size);
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+
+  /* Список пунктов */
+  .site-nav__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--menu-item-gap);
+    margin-top: var(--menu-list-offset);
+  }
+
+  /* Открытое состояние */
+  .site-nav.is-open {
+    translate: 0 0;
+    visibility: visible;
+  }
+
+  .site-nav__scrim.is-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Блокировка прокрутки страницы под открытым меню */
+  body.is-menu-open {
+    overflow: hidden;
+  }
+
+  /* Hero: пометка переезжает к правому краю тезиса (по макету) */
+  .hero {
+    max-width: none;
+  }
+
+  .hero__note {
+    top: 1px;
+    left: auto;
+    right: 14px;
+  }
+}
+
+/* Уважаем настройку «уменьшить движение» */
+@media (prefers-reduced-motion: reduce) {
+  .site-nav,
+  .site-nav__scrim,
+  .nav-item__mark {
+    transition-duration: 0.01ms;
+  }
+}

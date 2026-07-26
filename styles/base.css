@@ -1,0 +1,168 @@
+/* ==========================================================================
+   Base — reset, layout container, typography
+   ========================================================================== */
+
+/* ---------------- Reset ---------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-weight: var(--font-weight-regular);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* У figure в браузере свои поля (1em 40px) — снимаем */
+figure {
+  margin: 0;
+}
+
+/* Общий видимый фокус для клавиатуры */
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-offset);
+}
+
+/* ---------------- Layout container ---------------- */
+/* Поля добавляются СНАРУЖИ контентной ширины:
+   контент = --container-max (1232), поля — сверх него. */
+.container {
+  width: 100%;
+  max-width: calc(var(--container-max) + var(--container-gutter) * 2);
+  margin-inline: auto;
+  padding-inline: var(--container-gutter);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --container-gutter: var(--container-gutter-mobile);
+  }
+}
+
+/* ---------------- Typography ---------------- */
+.h1,
+.h2,
+.h3,
+.h4 {
+  margin: 0;
+  /* В Figma заголовки — Regular. Semibold доступен как акцент при желании. */
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-heading);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+.h1 {
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-20);
+}
+
+.h2 {
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-20);
+}
+
+.h3 {
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-16);
+}
+
+.h4 {
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-12);
+}
+
+/* Подзаголовок / надзаголовок-метка */
+.subtitle {
+  margin: 0;
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-12);
+  color: var(--color-text-secondary);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-10);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* Основной текст */
+.body {
+  margin: 0;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-16);
+}
+
+.body--secondary {
+  color: var(--color-text-secondary);
+}
+
+.small {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-12);
+}
+
+.caption {
+  font-size: var(--font-size-caption);
+  line-height: var(--line-height-10);
+  color: var(--color-text-muted);
+}
+
+/* Утилита для инлайн-ссылки в тексте */
+.text-link {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color var(--transition-fast);
+}
+
+@media (hover: hover) {
+  .text-link:hover {
+    color: var(--color-accent-hover);
+  }
+}
+
+/* ---------------- Адаптив типографики ----------------
+   Масштаб из Figma компактный (макс. 20px) и одинаково работает на мобайле,
+   поэтому кегли не уменьшаем. Оставлено местом под уточнение по мобильному макету. */

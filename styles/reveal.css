@@ -1,0 +1,34 @@
+/* ==========================================================================
+   Проявление контента при скролле
+   fade-in + лёгкий сдвиг снизу вверх.
+
+   КРИТИЧНО: скрытого состояния здесь нет. Класс .is-hidden навешивает JS.
+   Если скрипт не отработал — контент виден сразу, ничего не пропадает.
+   ========================================================================== */
+
+/* Только описание перехода. Само по себе ничего не скрывает. */
+[data-reveal] {
+  transition: opacity var(--reveal-duration) var(--reveal-ease)
+      var(--reveal-delay, 0s),
+    transform var(--reveal-duration) var(--reveal-ease) var(--reveal-delay, 0s);
+}
+
+/* Скрытое состояние — вешается из JS */
+[data-reveal].is-hidden {
+  opacity: 0;
+  transform: translateY(var(--reveal-shift));
+}
+
+/* Уважаем «уменьшить движение»: ничего не двигаем и не прячем.
+   JS при этой настройке класс вообще не вешает — правило страхует
+   случай, когда настройку меняют уже после загрузки. */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    transition: none;
+  }
+
+  [data-reveal].is-hidden {
+    opacity: 1;
+    transform: none;
+  }
+}

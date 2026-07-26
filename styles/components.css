@@ -1,0 +1,460 @@
+/* ==========================================================================
+   Components — button, chip/tag, case card, nav item
+   Правило hover/touch:
+     • hover-эффекты — только под @media (hover: hover) (десктоп с мышью)
+     • на тач-устройствах @media (hover: none) показываем "активный" вид
+       по умолчанию, чтобы эффект был виден без наведения
+   ========================================================================== */
+
+/* ============================ Button ============================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+  padding: var(--space-12) var(--space-24);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color var(--transition-fast),
+    border-color var(--transition-fast), color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Primary */
+.btn--primary {
+  background-color: var(--color-accent);
+  color: var(--color-text-inverse);
+}
+
+@media (hover: hover) {
+  .btn--primary:hover {
+    background-color: var(--color-accent-hover);
+  }
+}
+
+/* Secondary (обводка) */
+.btn--secondary {
+  background-color: transparent;
+  border-color: var(--color-border-strong);
+  color: var(--color-text);
+}
+
+@media (hover: hover) {
+  .btn--secondary:hover {
+    border-color: var(--color-text);
+    background-color: var(--color-surface);
+  }
+}
+
+/* Ghost (текстовая) */
+.btn--ghost {
+  background-color: transparent;
+  color: var(--color-text);
+  padding-inline: var(--space-12);
+}
+
+@media (hover: hover) {
+  .btn--ghost:hover {
+    background-color: var(--color-surface);
+  }
+}
+
+.btn--small {
+  padding: var(--space-8) var(--space-16);
+  font-size: var(--font-size-small);
+}
+
+.btn[disabled],
+.btn[aria-disabled="true"] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ============================ Chip / Tag ============================ */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-4) var(--space-12);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-small);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* Кликабельный вариант чипа (фильтр/тег-ссылка) */
+.chip--interactive {
+  cursor: pointer;
+  transition: background-color var(--transition-fast),
+    border-color var(--transition-fast), color var(--transition-fast);
+}
+
+@media (hover: hover) {
+  .chip--interactive:hover {
+    border-color: var(--color-border-strong);
+    color: var(--color-text);
+  }
+}
+
+.chip--active {
+  background-color: var(--color-text);
+  border-color: var(--color-text);
+  color: var(--color-text-inverse);
+}
+
+/* ============================ Section header ============================
+   Паттерн «заголовок + подпись под ним». Используется секциями.
+   ---------------------------------------------------------------------- */
+.section-header__title {
+  margin: 0;
+  font-size: var(--font-size-h1);        /* 20px */
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-20);
+  color: var(--color-text);
+}
+
+.section-header__subtitle {
+  margin: var(--section-header-gap) 0 0;
+  font-size: var(--font-size-small);     /* 12px */
+  line-height: var(--line-height-12);
+  color: var(--color-text-secondary);
+}
+
+/* ============================ Case card ============================
+   Из макета: серая панель со скриншотами (обрезается по краям),
+   под ней строка «название + описание».
+   Hover — рукописный овал вокруг названия и подчёркивание описания.
+   ------------------------------------------------------------------ */
+.case-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  color: inherit;
+}
+
+/* Серая панель-подложка. Скриншоты выше панели и намеренно обрезаются по низу. */
+.case-card__pic {
+  position: relative;
+  height: var(--card-pic-height);
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--color-surface);
+  container-type: inline-size;
+}
+
+/* Затемнение панели на hover. Слой лежит ПОД скриншотами (z-index 0 против
+   1 у .case-card__screens): темнеет только серый фон, сами экраны остаются
+   как есть. */
+.case-card__pic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: transparent;
+  pointer-events: none;
+  transition: background-color var(--transition-base);
+}
+
+.case-card__screens {
+  z-index: 1;
+  position: absolute;
+  left: 50%;
+  top: calc(50% + var(--card-screens-offset));
+  translate: -50% -50%;
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.case-card__screen {
+  flex-shrink: 0;
+  width: var(--card-screen-width);
+  height: var(--card-screen-height);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-24);
+  overflow: hidden;
+}
+
+.case-card__screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Дополнительные скриншоты показываем, только если они помещаются в карточку.
+   Считаем по ширине самой карточки, а не экрана: иначе на «одноколоночной»
+   широкой карточке остаётся один скриншот посреди пустой панели.
+   На 1280 (карточка 610) — два, на 375 (343) — один, как в макете. */
+@container (max-width: 900px) {
+  .case-card__screen--tertiary {
+    display: none;
+  }
+}
+
+@container (max-width: 560px) {
+  .case-card__screen--secondary {
+    display: none;
+  }
+}
+
+/* Строка с названием и описанием.
+   flex-start, чтобы при переносе описания название осталось на первой строке.
+   Тот же паттерн используют крупные проекты в сайд квестах. */
+.case-card__text,
+.project-card__text {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-8);
+  font-size: var(--font-size-body);      /* 16px */
+  line-height: var(--line-height-16);
+}
+
+.case-card__title,
+.project-card__title {
+  position: relative;
+  flex-shrink: 0;
+  white-space: nowrap;
+  color: var(--color-text);
+}
+
+.project-card__description {
+  flex: 1 0 0;
+  min-width: 0;
+  color: var(--color-text-secondary);
+}
+
+.case-card__description {
+  position: relative;
+  flex: 1 0 0;
+  min-width: 0;
+  color: var(--color-text-secondary);
+}
+
+/* Подчёркивание описания (в макете — *_line2.svg, прямая линия акцентом).
+   Не text-decoration: его нельзя «нарисовать» — поэтому линия сделана
+   фоновым градиентом, у которого на hover растёт ширина. Тайминги общие
+   с рукописными пометками (--note-draw-*), чтобы овал вокруг названия
+   и линия рисовались как один жест.
+
+   Обёртка инлайновая, а не сам .case-card__description: тот тянется на всю
+   колонку (554px против 422px текста), и линия была бы длиннее строки.
+   box-decoration-break: clone — своя линия для каждой строки при переносе. */
+.case-card__underline {
+  background-image: linear-gradient(var(--color-accent), var(--color-accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 1px;
+  padding-bottom: var(--card-underline-offset);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  transition: background-size var(--note-draw-duration) var(--note-draw-ease);
+}
+
+/* Рукописный овал вокруг названия */
+.case-card__mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  max-width: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+}
+
+/* Десктоп с мышью — по наведению.
+   Селектор с a, потому что карточка-шапка кейса не ссылка и подсвечиваться
+   не должна. */
+@media (hover: hover) {
+  a.case-card:hover .case-card__mark {
+    opacity: 1;
+  }
+
+  a.case-card:hover .case-card__underline {
+    background-size: 100% 1px;
+  }
+
+  a.case-card:hover .case-card__pic::after {
+    background-color: var(--card-hover-scrim);
+  }
+}
+
+/* Тач — вся карточка ссылка, тап ведёт на кейс.
+   Пометки показываем на нажатии как обратную связь. */
+@media (hover: none) {
+  a.case-card:active .case-card__mark {
+    opacity: 1;
+  }
+
+  a.case-card:active .case-card__underline {
+    background-size: 100% 1px;
+  }
+
+  a.case-card:active .case-card__pic::after {
+    background-color: var(--card-hover-scrim);
+  }
+}
+
+/* ---- Шапка кейса: та же карточка, крупнее и с тремя экранами ---- */
+.case-card--hero {
+  --card-pic-height: var(--case-hero-panel-height);
+  --card-screen-width: var(--case-hero-screen-width);
+  --card-screen-height: var(--case-hero-screen-height);
+  gap: var(--case-hero-gap);
+}
+
+.case-card--hero .case-card__screens {
+  gap: var(--case-hero-screens-gap);
+}
+
+.case-card--hero .case-card__text {
+  font-size: var(--case-hero-title-size);
+  line-height: var(--case-hero-title-line);
+}
+
+
+/* ============================ Nav item ============================
+   Из макета: две строки — title (12px, black) и sub (10px, dark gray).
+   Hover на десктопе — рукописный синий овал (SVG) поверх пункта.
+   Пункт сжимается по контенту, чтобы овал центрировался по тексту,
+   а не по всей колонке сетки.
+   ------------------------------------------------------------------ */
+.nav-item {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: fit-content;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.nav-item__title {
+  font-size: var(--font-size-small);   /* 12px */
+  line-height: var(--line-height-12);
+  color: var(--color-text);
+}
+
+.nav-item__sub {
+  font-size: var(--font-size-caption); /* 10px */
+  line-height: var(--line-height-10);
+  color: var(--color-text-secondary);
+}
+
+/* Рукописный овал-пометка.
+   По умолчанию по центру пункта; --nav-mark-offset-x сдвигает по горизонтали. */
+.nav-item__mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: calc(-50% + var(--nav-mark-offset-x))
+    calc(-50% + var(--nav-mark-offset-y));
+  max-width: none;                     /* овал шире текста — не сжимаем */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+}
+
+/* Пометки, подстроенные вручную под свой пункт */
+.nav-item--mark-link {
+  --nav-mark-offset-x: var(--nav-mark-link-x);
+  --nav-mark-offset-y: var(--nav-mark-link-y);
+}
+
+.nav-item--mark-resume {
+  --nav-mark-offset-x: var(--nav-mark-resume-x);
+  --nav-mark-offset-y: var(--nav-mark-resume-y);
+}
+
+/* Десктоп с мышью — овал по наведению */
+@media (hover: hover) {
+  .nav-item:hover .nav-item__mark {
+    opacity: 1;
+  }
+}
+
+/* Тач — овал не показываем: на мобиле пункты живут в бургер-меню,
+   где в макете пометок нет. Обратная связь — на нажатии. */
+@media (hover: none) {
+  .nav-item:active .nav-item__mark {
+    opacity: 1;
+  }
+}
+
+/* В мобильном меню пункт крупнее (16 / 12), овалов там в макете нет.
+   Правило намеренно ограничено меню: в футере пункты остаются 12 / 10. */
+@media (max-width: 768px) {
+  .site-nav .nav-item__title {
+    font-size: var(--font-size-body);  /* 16px */
+    line-height: var(--line-height-16);
+  }
+
+  .site-nav .nav-item__sub {
+    font-size: var(--font-size-small); /* 12px */
+    line-height: var(--line-height-12);
+  }
+
+  .site-nav .nav-item__mark {
+    display: none;
+  }
+}
+
+/* На мобиле пункт с этим модификатором обведён всегда
+   (в макете — Telegram в футере). На десктопе у него обычный hover. */
+@media (max-width: 768px) {
+  .nav-item--marked .nav-item__mark {
+    opacity: 1;
+  }
+}
+
+/* ============================ About card ============================
+   Фото в ленте «Обо мне». Кадр один и тот же (цветной fotoNh), в покое
+   обесцвечен фильтром. Так состояния совпадают по кадрированию:
+   при двух разных файлах вертикальные h-версии (424×520) в квадратной
+   плитке масштабировались сильнее и «наезжали» на hover.
+   ------------------------------------------------------------------ */
+.about-card {
+  margin: 0;
+  flex: 0 0 auto;
+  width: var(--about-card-size);
+  height: var(--about-card-size);
+  overflow: hidden;
+  background-color: var(--color-surface);
+}
+
+.about-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1);
+  transition: filter var(--transition-base);
+}
+
+/* Десктоп — по наведению */
+@media (hover: hover) {
+  .about-card:hover .about-card__img {
+    filter: grayscale(0);
+  }
+}
+
+/* Тач — по нажатию */
+@media (hover: none) {
+  .about-card:active .about-card__img {
+    filter: grayscale(0);
+  }
+}

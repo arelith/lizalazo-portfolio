@@ -1,0 +1,322 @@
+/* ==========================================================================
+   Case page — страница кейса
+   Хедер и футер переиспользуются из sections.css.
+   ========================================================================== */
+
+/* На странице кейса свой отступ до футера — в макете он меньше, чем на главной */
+:root {
+  --case-next-gap: 61px;
+  --footer-gap: 100px;
+}
+
+/* ============================ Шапка кейса ============================ */
+.case-hero {
+  margin-top: var(--case-hero-offset);
+}
+
+/* Ссылка на стор */
+.case-link {
+  display: inline-block;
+  margin-top: var(--case-link-gap);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-16);
+  color: var(--color-accent);
+}
+
+@media (hover: hover) {
+  .case-link:hover {
+    text-decoration: underline;
+    text-underline-offset: var(--card-underline-offset);
+  }
+}
+
+/* Контент кейса под ссылкой */
+.case-content {
+  margin-top: var(--case-content-gap);
+}
+
+/* ============================ STAR ============================
+   Situation / Task / Action / Result — колонка из четырёх частей.
+   ------------------------------------------------------------- */
+.case-star {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--star-item-gap);
+  max-width: var(--case-text-width);
+}
+
+/* Пара «заголовок + текст». Используется и в STAR, и в секциях разбора. */
+.case-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--case-item-gap);
+}
+
+.case-text__title {
+  margin: 0;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-16);
+  color: var(--color-text);
+}
+
+.case-text__body {
+  margin: 0;
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-16);
+  color: var(--color-text);
+}
+
+/* ============================ Секция разбора ============================
+   Ряд экранов на серой подложке + текстовый блок под ним.
+   Паттерн переиспользуется для всех секций кейса.
+   ---------------------------------------------------------------------- */
+.case-section {
+  margin-top: var(--case-section-gap);
+}
+
+/* Серая подложка с экранами.
+   safe center + overflow-x: если ряд экранов шире подложки (узкий десктоп),
+   он прокручивается внутри неё, а не выталкивает страницу вбок. */
+.case-section__pic {
+  display: flex;
+  align-items: center;
+  justify-content: safe center;
+  height: var(--case-panel-height);
+  padding: var(--case-panel-padding);
+  background-color: var(--color-surface);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.case-section__pic::-webkit-scrollbar {
+  display: none;
+}
+
+.case-section__screens {
+  display: flex;
+  align-items: center;
+  gap: var(--case-screens-gap);
+}
+
+.case-section__screen {
+  flex-shrink: 0;
+  width: var(--case-screen-width);
+  height: var(--case-screen-height);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-24);
+  overflow: hidden;
+}
+
+.case-section__screen img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Текстовый блок: на десктопе пара колонок, ширина колонки фиксирована */
+.case-section__block {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, var(--case-text-width)));
+  gap: var(--case-text-gap);
+  margin-top: var(--case-block-gap);
+}
+
+/* ============================ Рукописные пометки ============================
+   Декор, разбросанный по блокам кейса. Позиции из макета: каждая пометка
+   задаёт свои --note-x / --note-y, механизм один на всех.
+   По горизонтали — доля от ширины блока, а не px: с жёсткими px пометки
+   на узких ширинах вылезают за край и дают горизонтальный скролл странице.
+   Пометки у правого края привязываем через --note-r. Если на одной ширине
+   пометка привязана слева, а на другой справа — обязательно сбросить
+   --note-x: auto, иначе left перебьёт right.
+   -------------------------------------------------------------------------- */
+.case-note {
+  position: absolute;
+  left: var(--note-x, auto);
+  right: var(--note-r, auto);
+  top: var(--note-y);
+  width: var(--note-w, auto);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* — в STAR-блоке (колонка 558) — */
+.case-note--money   { --note-x: 17.06%; --note-y: 47px; }
+.case-note--4weeks  { --note-x: 72.72%; --note-y: 68px; }
+.case-note--key     { --note-x: 24.86%; --note-y: 153px; }
+.case-note--timeto  { --note-x: 48.24%; --note-y: 197px; }
+.case-note--newb    { --note-x: 36.02%; --note-y: 298px; }
+.case-note--corrid  { --note-x: 71.23%; --note-y: 360px; }
+.case-note--ustest  { --note-x: 3.64%;  --note-y: 379px; }
+.case-note--attn    { --note-x: 12.40%; --note-y: 431px; }
+
+/* — в блоках секций разбора (две колонки) — */
+.case-note--sad      { --note-x: 16.28%; --note-y: 80px; }
+.case-note--interval { --note-x: 57.31%; --note-y: 73px; }
+
+.case-note--notice   { --note-x: 35.15%; --note-y: 67px; }
+.case-note--excl     { --note-x: 60.01%; --note-y: 50px; }
+/* effici — широкая и у самого правого края, поэтому привязана справа:
+   слева она вылезала за экран на узком десктопе (769–800px) */
+.case-note--effici   { --note-r: 1.8%; --note-y: 13px; }
+
+.case-note--happens  { --note-x: 22.13%; --note-y: 0px; }
+.case-note--forg     { --note-x: 18.12%; --note-y: 49px; }
+.case-note--heart    { --note-x: 80.86%; --note-y: 50px; }
+.case-note--heart2   { --note-x: 91.55%; --note-y: 23px; }
+
+
+/* — пометки кейса «Нити» — */
+/* STAR (колонка 558) */
+/* nowhere привязана к самому слову «негде», а не к координате блока:
+   из-за неразрывных пробелов наш перенос строк отличается от макета,
+   и по фиксированной координате пометка попадала на соседние символы. */
+.case-word {
+  position: relative;
+}
+
+.case-note--nowhere { --note-x: 0px; --note-y: 100%; }
+.case-note--save    { --note-x: 74.23%; --note-y: 194px; }
+.case-note--dont    { --note-x: -1px;   --note-y: 260px; }
+.case-note--deep    { --note-x: 64.25%; --note-y: 339px; }
+.case-note--ref     { --note-x: 50.73%; --note-y: 381px; }
+.case-note--ref2    { --note-x: 0.16%;  --note-y: 403px; }
+.case-note--soon    { --note-r: -7.14%; --note-y: 579px; }
+
+/* секция 1 */
+.case-note--notext  { --note-x: 14.18%; --note-y: 51px; }
+.case-note--onboard { --note-x: 62.16%; --note-y: 28px; }
+.case-note--notext2 { display: none; }   /* в макете только на мобиле */
+
+/* секция 2 */
+.case-note--short   { --note-x: 63.88%; --note-y: 42px; }
+.case-note--loose   { --note-x: 24.44%; --note-y: 94px; }
+
+/* секция 3 */
+.case-note--section { --note-x: 47.21%; --note-y: 27px; }
+.case-note--find    { --note-x: 3.37%;  --note-y: 72px; }
+.case-note--auth    { --note-x: 50.78%; --note-y: 92px; }
+.case-note--respond { --note-x: 59.04%; --note-y: 94px; }
+
+/* Нижняя ссылка «на главную» — свой отступ */
+.case-next--home { --case-next-gap: 60px; }
+
+/* ============================ Ссылка на следующий кейс ============================ */
+.case-next {
+  display: block;
+  width: max-content;
+  margin: var(--case-next-gap) auto 0;
+  transition: opacity var(--transition-base);
+}
+
+@media (hover: hover) {
+  .case-next:hover {
+    opacity: 0.7;
+  }
+}
+
+/* ==========================================================================
+   Mobile ≤768px — всё в одну колонку, экраны лентой со свайпом
+   ========================================================================== */
+@media (max-width: 768px) {
+  :root {
+    /* Шапка кейса схлопывается до обычной карточки */
+    --case-hero-panel-height: var(--card-pic-height);
+    --case-hero-screen-width: var(--card-screen-width);
+    --case-hero-screen-height: var(--card-screen-height);
+    --case-hero-screens-gap: var(--space-12);
+    --case-hero-gap: var(--space-16);
+    --case-hero-title-size: var(--font-size-body);
+    --case-hero-title-line: var(--line-height-16);
+
+    --case-hero-offset: 33px;
+    --footer-gap: 80px;
+    --case-link-gap: var(--space-12);
+    --case-section-gap: 60px;
+
+    /* Секция разбора */
+    --case-panel-height: 406px;
+    --case-panel-padding: 28px;
+    --case-screen-width: 161px;
+    --case-screen-height: 350px;
+    --case-screens-gap: var(--space-16);
+
+  }
+
+  /* Пометки — свои позиции под мобильный перенос текста */
+  .case-note--money   { --note-x: 27.46%; --note-y: 48px; }
+  .case-note--4weeks  { --note-x: 67.35%; --note-y: 109px; }
+  .case-note--key     { --note-x: 40.73%; --note-y: 197px; }
+  .case-note--timeto  { --note-x: -12px;  --note-y: 281px; --note-w: 166px; }
+  .case-note--newb    { --note-x: 58.31%; --note-y: 402px; }
+  .case-note--corrid  { --note-x: 1.01%;  --note-y: 528px; }
+  .case-note--ustest  { --note-x: 31.58%; --note-y: 528px; }
+  .case-note--attn    { --note-x: 20.18%; --note-y: 598px; }
+
+  .case-note--sad      { --note-x: 95.75%; --note-y: 113px; }
+  .case-note--interval { --note-x: -3px;  --note-y: 229px; }
+
+  .case-note--notice   { --note-x: 73.76%; --note-y: 11px; }
+  .case-note--excl     { --note-x: 43.44%; --note-y: 206px; }
+  .case-note--effici   { --note-r: 4.79%; --note-y: 149px; }
+
+  .case-note--happens  { --note-x: 79.20%; --note-y: 3px; }
+  .case-note--forg     { --note-x: 64.48%; --note-y: 49px; }
+  .case-note--heart2   { --note-x: 72.56%; --note-y: 227px; }
+  .case-note--heart    { --note-x: 34.17%; --note-y: 246px; }
+
+
+  /* — пометки кейса «Нити» — */
+  .case-note--save    { --note-x: 21.63%; --note-y: 299px; }
+  .case-note--dont    { --note-x: 30.38%; --note-y: 363px; }
+  .case-note--deep    { --note-x: 16.77%; --note-y: 486px; }
+  .case-note--ref     { --note-x: 0.32%;  --note-y: 572px; }
+  .case-note--ref2    { --note-x: 59.44%; --note-y: 551px; }
+  .case-note--soon    { --note-r: -2.57%; --note-y: 853px; }
+
+  /* на мобиле длинные линии в макете короче, а notext разбита на две */
+  .case-note--notext  { --note-x: -5px;   --note-y: 74px;  --note-w: 149px; }
+  .case-note--notext2 { display: block; --note-x: 50.15%; --note-y: 51px; }
+  .case-note--onboard { --note-x: 51.56%; --note-y: 208px; }
+
+  .case-note--short   { --note-x: -5px;   --note-y: 241px; --note-w: 77px; }
+  /* привязана справа: слева вылезала за экран на 320px */
+  .case-note--loose   { --note-x: auto; --note-r: -0.58%; --note-y: 137px; --note-w: 197px; }
+
+  .case-note--find    { --note-x: -2px;   --note-y: 89px; }
+  .case-note--section { --note-x: -12px;  --note-y: 166px; }
+  .case-note--auth    { --note-x: 35.74%; --note-y: 249px; }
+  .case-note--respond { --note-x: 4.48%;  --note-y: 272px; }
+
+  /* Лента экранов: подложка шире контейнера и прокручивается вбок.
+     Механика та же, что у коллажа и ленты фото на главной. */
+  .case-section__scroll {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-inline: calc(var(--container-gutter) * -1);
+    padding-inline: var(--container-gutter);
+  }
+
+  .case-section__scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Подложка по размеру содержимого — она и есть прокручиваемая лента,
+     прокручивает её внешняя обёртка */
+  .case-section__pic {
+    width: max-content;
+    overflow-x: visible;
+  }
+
+  /* Колонки текста складываются друг под друга */
+  .case-section__block {
+    grid-template-columns: 1fr;
+    gap: var(--case-block-gap);
+  }
+}

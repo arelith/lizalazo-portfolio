@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Нити — кейс · Лиза Лазовик</title>
+    <meta
+      name="description"
+      content="Мобильное приложение для нетворкинга студентов: сохранять живые знакомства и находить людей под проекты."
+    />
+
+    <link rel="preload" href="assets/fonts/IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/IBMPlexMono-SemiBold.woff2" as="font" type="font/woff2" crossorigin />
+
+    <link rel="stylesheet" href="styles/tokens.css" />
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/components.css" />
+    <link rel="stylesheet" href="styles/sections.css" />
+    <link rel="stylesheet" href="styles/notes.css" />
+    <link rel="stylesheet" href="styles/reveal.css" />
+    <link rel="stylesheet" href="styles/case.css" />
+  </head>
+  <body>
+    <!-- ============================ Header ============================ -->
+    <header class="site-header">
+      <div class="container">
+        <div class="site-header__inner">
+          <a class="site-header__logo" href="index.html" aria-label="На главную">
+            <span class="site-logo" aria-hidden="true"></span>
+          </a>
+
+          <button
+            class="burger"
+            type="button"
+            aria-label="Открыть меню"
+            aria-expanded="false"
+            aria-controls="site-nav"
+          >
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 28 28"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M4 9h20M4 14h20M4 19h20"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              />
+            </svg>
+          </button>
+
+          <nav class="site-nav" id="site-nav" aria-label="Основная навигация">
+            <div class="site-nav__panel-head">
+              <button
+                class="site-nav__close"
+                type="button"
+                aria-label="Закрыть меню"
+              >
+                <svg
+                  width="28"
+                  height="28"
+                  viewBox="0 0 28 28"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M7 7l14 14M21 7L7 21"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            <ul class="site-nav__list">
+              <li>
+                <a class="nav-item" href="index.html#cases">
+                  <svg
+                    class="nav-item__mark note-draw"
+                    data-draw="hover"
+                    aria-hidden="true"
+                    width="112"
+                    height="40"
+                    viewBox="0 0 112 40"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M3.35359 10.538C3.8814 10.4017 7.78142 7.90398 17.6895 3.44745C21.0004 1.95826 25.5723 1.40253 30.8775 0.875879C36.1826 0.34923 42.2506 0.303296 51.6972 1.21068C61.1438 2.11806 73.7851 3.98015 81.7953 5.37225C89.8054 6.76435 92.8013 7.63003 95.1922 8.50478C103.3 11.4713 107.922 16.5358 109.686 18.8678C111.244 20.9267 111.317 24.1406 111.498 29.4133C111.554 31.0358 110.476 32.0411 109.558 33.0255C108.836 33.8002 106.869 34.7686 103.229 36.241C98.6641 38.0878 95.2077 38.5374 84.4261 38.8881C74.2757 39.2182 54.617 39.588 41.9589 39.4813C29.3009 39.3746 24.2369 38.7113 20.8342 38.1203C15.7998 37.2459 13.2631 36.071 10.6363 34.5613C3.09324 30.2261 1.97463 27.3194 0.98679 24.1674C-0.116751 20.6462 0.91724 15.829 1.52411 14.0404C1.92419 13.2639 2.70421 12.1805 3.74125 11.0127C4.22332 10.5304 4.61564 10.2719 5.26631 9.99953" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span class="nav-item__title">Кейсы</span>
+                  <span class="nav-item__sub">Рабочие проекты</span>
+                </a>
+              </li>
+              <li>
+                <a class="nav-item" href="index.html#side-quests">
+                  <svg
+                    class="nav-item__mark note-draw"
+                    data-draw="hover"
+                    aria-hidden="true"
+                    width="100"
+                    height="39"
+                    viewBox="0 0 100 39"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M33.0887 3.47334C33.0125 3.47334 32.9363 3.47334 28.9121 3.47644C24.8878 3.47955 16.9179 3.48575 12.475 3.56957C6.07127 3.69039 3.48779 5.68892 1.98181 6.84437C0.891775 7.68069 0.504447 9.57423 0.500002 18.3569C0.49749 23.3202 2.90033 28.088 4.87664 31.3231C6.35766 33.7475 9.27942 34.894 12.7031 36.2058C14.8296 37.0207 17.9541 37.5592 24.2357 38.0251C30.5174 38.4909 39.9146 38.7197 50.0705 38.2135C60.2264 37.7072 70.8562 36.4591 77.28 35.5462C85.6431 34.3577 88.321 33.1521 89.831 32.3299C92.8147 30.7054 95.1215 27.8604 97.5228 24.5595C99.9463 21.2282 99.6311 17.0337 99.207 13.9038C98.8152 11.0116 95.7758 9.33888 90.0959 6.9062C86.2809 5.27223 78.8607 3.37077 71.7837 2.02564C64.7066 0.680519 58.0618 0.295617 51.1856 0.596065C44.3095 0.896514 37.4033 1.89398 33.5507 2.40782C29.6981 2.92167 29.1085 2.92167 28.3173 2.95815" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span class="nav-item__title">Сайд квесты</span>
+                  <span class="nav-item__sub">Визуал</span>
+                </a>
+              </li>
+              <li>
+                <a class="nav-item" href="https://disk.yandex.ru/i/ktdbIUtRWzCJng" target="_blank" rel="noopener">
+                  <svg
+                    class="nav-item__mark note-draw"
+                    data-draw="hover"
+                    aria-hidden="true"
+                    width="134"
+                    height="39"
+                    viewBox="0 0 134 39"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M58.3406 1.3491C52.6912 1.2841 38.6303 0.782779 29.76 0.548437C16.9928 0.211144 12.7504 1.66114 7.66135 4.09556C4.30801 5.69968 2.10566 9.30093 0.866415 12.8733C-1.21736 18.8802 6.04768 26.3136 11.3692 30.2112C13.3766 31.6816 15.3969 32.1382 17.6954 32.9055C20.7845 33.9368 27.6804 35.7515 42.0593 37.2525C51.2084 38.2076 64.258 37.8228 76.8798 37.2192C89.5017 36.6157 101.336 35.3621 107.98 34.5911C118.604 33.3584 128.226 26.5477 132.643 22.1371C133.719 21.0635 133.388 18.7634 133.309 16.7045C133.253 15.268 132.347 14.2336 131.462 13.279C128.993 10.6169 119.718 8.8653 110.487 5.39019C106.134 3.75103 102.186 3.11322 95.1012 2.67378C88.016 2.23434 77.8451 2.20405 72.0615 2.10867C65.1898 1.85374 63.2687 1.67605 60.9109 1.63744C59.3531 1.61212 57.0617 1.57519 54.7009 1.53713" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span class="nav-item__title">Резюме</span>
+                  <span class="nav-item__sub">Скачать бесплатно</span>
+                </a>
+              </li>
+              <li>
+                <a class="nav-item" href="https://t.me/elizlazovik" target="_blank" rel="noopener">
+                  <svg
+                    class="nav-item__mark note-draw"
+                    data-draw="hover"
+                    aria-hidden="true"
+                    width="93"
+                    height="40"
+                    viewBox="0 0 93 40"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M2.86513 10.538C3.3026 10.4017 6.53505 7.90398 14.7472 3.44745C17.4913 1.95826 21.2807 1.40253 25.6777 0.875879C30.0748 0.34923 35.1041 0.303296 42.9337 1.21068C50.7633 2.11806 61.2408 3.98015 67.8799 5.37225C74.5189 6.76435 77.002 7.63003 78.9836 8.50478C85.704 11.4713 89.5342 16.5358 90.9966 18.8678C92.2877 20.9267 92.3483 24.1406 92.4983 29.4133C92.5444 31.0358 91.6513 32.0411 90.8905 33.0255C90.2917 33.8002 88.6616 34.7686 85.6449 36.241C81.8612 38.0878 78.9964 38.5374 70.0604 38.8881C61.6474 39.2182 45.3538 39.588 34.8624 39.4813C24.371 39.3746 20.1739 38.7113 17.3535 38.1203C13.1809 37.2459 11.0784 36.071 8.90122 34.5613C2.64935 30.2261 1.72222 27.3194 0.903465 24.1674C-0.0111808 20.6462 0.845821 15.829 1.34881 14.0404C1.68041 13.2639 2.32691 12.1805 3.18644 11.0127C3.58599 10.5304 3.91116 10.2719 4.45045 9.99953" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <span class="nav-item__title">Telegram</span>
+                  <span class="nav-item__sub">Связь 🤙</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <div class="site-nav__scrim"></div>
+    </header>
+
+    <main>
+      <!-- ============================ Шапка кейса ============================ -->
+      <section class="container case-hero" data-reveal-group>
+        <article class="case-card case-card--hero" data-reveal>
+          <div class="case-card__pic">
+            <div class="case-card__screens">
+              <div class="case-card__screen">
+                <img src="assets/images/niti1.png" alt="Нити: профиль студента" width="264" height="572" />
+              </div>
+              <div class="case-card__screen case-card__screen--secondary">
+                <img src="assets/images/profile.png" alt="Нити: карточка контакта" width="264" height="572" />
+              </div>
+              <div class="case-card__screen case-card__screen--tertiary">
+                <img src="assets/images/anoun.png" alt="Нити: объявления" width="264" height="572" />
+              </div>
+            </div>
+          </div>
+
+          <div class="case-card__text">
+            <span class="case-card__title">Нити</span>
+            <span class="case-card__description">Мобильное приложение для&nbsp;нетворкинга студентов</span>
+          </div>
+        </article>
+      </section>
+
+      <div class="container case-content">
+        <!-- ============================ STAR ============================ -->
+        <section class="case-star" data-reveal-group>
+          <div class="case-text" data-reveal>
+            <h2 class="case-text__title">Situation</h2>
+            <p class="case-text__body">Студенты постоянно пересекаются с&nbsp;интересными людьми — на&nbsp;парах, ивентах, хакатонах, — но&nbsp;связи гаснут: контактами не&nbsp;обменялись или&nbsp;обменялись и&nbsp;не&nbsp;написали. А&nbsp;когда нужен человек в&nbsp;проект, искать его <span class="case-word">негде<svg
+  class="case-note case-note--nowhere note-draw"
+  data-draw="view"
+  aria-hidden="true"
+  width="53"
+  height="3"
+  viewBox="0 0 53 3"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <path d="M52.2985 0.499893C52.3214 0.499893 52.3443 0.499893 43.3992 0.499893C34.454 0.499892 16.5401 0.49989 7.51879 0.702252C-1.50256 0.904613 -1.08852 1.30934 4.58175 1.58051C10.252 1.85168 21.166 1.97704 22.8961 2.04162C24.6263 2.1062 16.842 2.1062 8.82179 2.1062" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></span>: в&nbsp;общих чатах шумно, в&nbsp;мессенджерах — только те, кого уже знаешь.</p>
+          </div>
+          <div class="case-text" data-reveal>
+            <h2 class="case-text__title">Task</h2>
+            <p class="case-text__body">Спроектировать приложение, которое помогает сохранять живые знакомства и&nbsp;находить людей под&nbsp;проекты — и&nbsp;при&nbsp;этом не&nbsp;превратиться в&nbsp;ещё один мессенджер.</p>
+          </div>
+          <div class="case-text" data-reveal>
+            <h2 class="case-text__title">Action</h2>
+            <p class="case-text__body">Исследовали проблему и&nbsp;провели серию глубинных интервью — на&nbsp;их основе собирали функционал, а&nbsp;не&nbsp;наоборот. Ключевое решение по&nbsp;итогам: осознанно отказались от&nbsp;внутренней переписки. Общение уходит либо в&nbsp;реальную жизнь, либо во&nbsp;внешние мессенджеры, а&nbsp;приложение остаётся точкой пересечения.</p>
+          </div>
+          <div class="case-text" data-reveal>
+            <h2 class="case-text__title">Result</h2>
+            <p class="case-text__body">В&nbsp;работе с&nbsp;2025. Функционал выведен из&nbsp;интервью; продуктовая логика собрана и&nbsp;держится на&nbsp;одном принципе. Проработала концепцию и&nbsp;спроектировала почти всё приложение — от&nbsp;структуры до&nbsp;экранов. Метрик пока нет.</p>
+          </div>
+
+            <svg
+              class="case-note case-note--save note-draw"
+              data-draw="view"
+              aria-hidden="true"
+              width="111"
+              height="31"
+              viewBox="0 0 111 31"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M44.9961 1.8424C44.9769 1.8232 44.9577 1.804 40.3917 1.84631C35.8257 1.88863 26.7135 1.99305 20.2285 2.60226C10.0609 3.55742 5.53101 5.99368 3.90183 7.03417C1.40878 8.62638 0.848611 11.704 0.515999 15.8949C0.38202 17.583 1.11025 18.7926 1.92506 19.8403C2.78756 20.9493 4.51995 21.9971 7.23857 23.238C8.81961 23.9597 10.9852 24.4477 26.2373 25.6416C41.4894 26.8356 69.8074 28.6131 85.2097 29.3404C102.225 30.1438 104.826 28.9766 106.493 28.3011C107.905 27.7287 108.78 26.7875 109.405 25.8185C111.497 22.5705 109.998 16.838 108.235 13.3777C106.767 10.4959 104.732 9.55683 97.2566 5.84368C94.7442 4.59564 91.7258 3.95701 84.763 3.20985C77.8002 2.46269 66.8864 1.84637 60.5854 1.40704C54.2844 0.967719 52.927 0.72407 51.672 0.595253C50.4169 0.466436 49.3055 0.459835 47.8513 0.627614" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg
+              class="case-note case-note--dont note-draw"
+              data-draw="view"
+              aria-hidden="true"
+              width="151"
+              height="5"
+              viewBox="0 0 151 5"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M4.8916 0.904201C5.05873 0.904201 5.22585 0.904201 28.8468 0.857516C52.4677 0.810831 99.5374 0.71746 149.558 0.5" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M0.5 3.86182H128.853" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg
+              class="case-note case-note--deep note-draw"
+              data-draw="view"
+              aria-hidden="true"
+              width="172"
+              height="8"
+              viewBox="0 0 172 8"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0.5 1.63861C1.33592 2.3498 3.99241 4.40008 5.50734 5.03829C8.36585 6.24251 9.77324 1.76423 11.4003 1.53137C13.3341 1.25463 17.2107 3.42035 21.8903 4.87698C26.7038 6.37532 30.088 1.08521 33.8523 1.62184C35.4741 1.85304 37.3471 4.02945 38.8353 4.78568C45.2626 8.0518 55.4065 -0.422116 60.1881 0.583205C65.6559 1.7328 69.3954 4.1293 70.8216 4.34457C74.4692 4.89514 81.0298 1.38681 88.5649 1.69343C92.4808 1.85278 95.2849 4.77675 97.5526 5.50633C100.908 6.5858 104.818 2.58898 109.965 2.82229C116.334 3.11109 120.417 6.7175 121.781 6.35335C123.381 5.9262 124.25 3.83483 125.905 3.00114C129.52 1.18061 134.183 2.54365 141.354 5.18448C142.937 5.76766 143.678 5.81353 144.415 5.52347C147.937 4.13823 152.331 1.29253 157.105 0.999961C161.063 2.81102 163.538 4.3953 165.432 5.21389C166.5 5.61407 167.783 5.98336 170.562 6.6386" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg
+              class="case-note case-note--ref note-draw"
+              data-draw="view"
+              aria-hidden="true"
+              width="228"
+              height="6"
+              viewBox="0 0 228 6"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0.5 0.5C0.54736 0.5 0.594719 0.5 26.9227 0.605052C53.2507 0.710105 105.858 0.92021 144.008 1.60451C182.159 2.28881 204.259 3.44095 227.028 4.62799" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg
+              class="case-note case-note--ref2 note-draw"
+              data-draw="view"
+              aria-hidden="true"
+              width="89"
+              height="2"
+              viewBox="0 0 89 2"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0.5 0.798182C0.526694 0.798182 0.553388 0.798182 13.1838 0.798182C25.8141 0.798182 51.0474 0.798182 65.7242 0.681075C80.4009 0.563967 83.7566 0.329752 88.0828 0.701636" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg
+              class="case-note case-note--soon note-draw"
+              data-draw="view"
+              aria-hidden="true"
+              width="71"
+              height="47"
+              viewBox="0 0 71 47"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M32.1901 2.96099C32.2472 2.8199 32.0838 1.95322 31.5011 1.02894C31.341 0.774982 30.9997 0.602263 30.7793 0.51123C30.4385 0.370474 29.4412 1.57496 28.1095 3.34689C26.8344 5.04344 26.9005 6.95357 27.0295 7.89747C27.1442 8.73628 27.8174 9.43548 28.8661 10.3832C29.2335 10.7152 29.5837 10.8495 29.9075 10.9536C30.214 10.9996 30.4926 10.9777 30.79 10.8653C30.9608 10.783 31.1719 10.6491 31.6054 10.2365" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M36.1326 4.08039C35.9078 4.66565 34.462 11.1259 34.2203 13.014C35.3287 10.9889 38.2818 8.10576 40.9289 6.41217C41.9103 5.80124 42.1569 5.69489 42.3499 5.92244" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M39.0479 8.80811C39.0429 8.81508 39.0379 8.82205 39.1495 8.95128C39.2611 9.08052 39.4894 9.33181 40.089 10.392C40.6885 11.4523 41.6522 13.3138 42.9774 15.6214" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M47.3679 7.98924C47.1715 8.26408 46.4405 9.96684 45.9239 13.7397C45.7797 14.7924 46.0006 15.4482 46.2852 16.075C46.9179 17.4687 48.5552 18.0448 49.0252 18.0106C50.4318 17.9082 51.5957 14.6557 52.0736 13.0167C52.3946 11.9158 52.0821 10.887 51.8302 10.2533C51.4438 9.52048 50.9133 8.79676 50.232 8.13552C49.8483 7.79717 49.3875 7.45313 48.3265 7.03183" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M54.9102 9.07821C54.8831 9.40046 54.3601 16.3911 53.9555 18.8057C53.7745 19.8859 54.0127 16.6136 54.5537 14.2187C54.6562 13.765 54.9773 13.7969 55.2551 13.8847C56.5131 14.2823 57.6611 14.3488 58.6296 13.9846C58.8508 13.9014 58.9909 13.7086 59.0767 13.5159C59.0503 12.531 57.6805 10.3886 56.0544 8.94419C55.7494 8.81475 55.5246 8.84193 55.1575 9.00603" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M62.1703 15.6375C62.151 15.6645 62.0107 15.8755 61.7546 16.3705C60.6377 18.5288 62.2418 21.9869 62.9232 23.0975C63.0838 23.3592 63.312 23.4868 63.5629 23.5206C64.7617 23.6823 66.4881 21.1569 67.8885 18.5594C68.7869 16.893 68.6677 15.4315 68.5637 14.9656C68.4576 14.4907 67.6078 13.8888 66.5891 13.2116C64.9431 13.1503 63.5643 13.7405 63.2023 14.0826C63.0154 14.2882 62.8223 14.5584 62.5708 15.0429" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7.85436 21.3016C7.43482 21.3599 6.18453 22.1282 5.28882 23.3226C4.35162 24.5724 5.28583 26.7563 6.08584 28.1891C6.46215 28.8631 7.20472 29.1643 7.93838 29.3099C8.6836 29.4578 9.37721 29.2121 9.9441 28.9845C10.2371 28.8668 10.5 28.6537 10.6877 28.3011C11.6647 26.4664 8.32997 22.1041 6.51872 18.9337C5.93769 17.9166 5.96563 16.9331 6.05625 16.2641C6.2776 14.6301 9.08031 13.7985 11.1568 13.511C13.7822 13.6247 16.4503 14.1231 17.8367 14.7692C18.1308 14.9656 18.337 15.1803 18.4188 15.5558" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M15.377 20.5247C15.1669 21.8556 14.7725 26.9134 15.1987 29.0998C15.633 31.3273 19.678 26.3055 20.4322 24.9274C20.7205 24.4005 20.9421 23.5636 20.6429 23.8831C20.3436 24.2025 19.4525 25.6731 18.1755 28.2864C16.8986 30.8997 15.2629 34.6113 13.5368 38.5141" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M27.2596 25.9785C27.2329 25.9434 26.8554 25.4577 26.0675 24.8251C25.3673 24.263 24.3253 25.2505 23.7163 25.833C22.6234 26.8782 22.2529 29.1337 22.2295 30.5938C22.2164 31.412 23.3307 31.7234 24.061 31.8394C24.8302 31.9616 25.5214 31.7528 26.097 31.3897C26.4243 31.1832 26.7265 30.7955 26.8972 30.4368C27.5011 29.1687 26.8342 28.0712 26.7822 27.8615C26.6279 27.2397 27.3865 32.1804 27.7788 37.3981C28.102 41.6963 27.126 43.2158 26.6386 43.7869C26.3985 44.0682 26.0366 44.1998 25.6417 44.1881C24.7711 44.1622 24.0187 43.4856 23.4374 42.8873C22.903 42.3374 22.6712 41.5505 22.6753 40.6886C23.3617 39.0843 24.4351 37.7465 25.6741 36.6552C26.5021 35.9715 27.7345 35.0241 29.1274 33.9961" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M33.2308 23.8223C33.3626 24.1415 33.9954 27.5873 34.6373 31.657C34.8504 33.008 35.2677 32.8226 35.6494 32.5594C37.2393 31.4632 38.3915 28.8998 39.7899 26.3746C39.3178 27.1081 38.4198 28.3633 36.9814 31.7655C35.7591 34.8133 33.5373 40.5438 31.2566 46.5032" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M46.2002 27.9314C46.1796 27.9471 46.159 27.9628 45.801 29.6032C45.4431 31.2437 44.7484 34.5084 44.0624 37.9331" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M43.2043 25.9131C43.2263 25.9421 43.3649 26.1 44.574 26.9419C47.6888 28.8913 49.9412 30.2519 50.2684 30.3899C50.4378 30.4558 50.6139 30.5134 50.954 30.7053" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </section>
+
+        <!-- ==================== Секция разбора ==================== -->
+        <section class="case-section" data-reveal-group data-notes-order="x">
+          <div class="case-section__scroll" data-reveal>
+            <div class="case-section__pic">
+              <div class="case-section__screens">
+                <div class="case-section__screen">
+                  <img src="assets/images/onb1.png" alt="Нити: онбординг, шаг 1" loading="lazy" />
+                </div>
+                <div class="case-section__screen">
+                  <img src="assets/images/onb2.png" alt="Нити: онбординг, шаг 2" loading="lazy" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="case-section__block" data-reveal>
+            <div class="case-text">
+              <h2 class="case-text__title">Гипотеза</h2>
+              <p class="case-text__body">Внутри приложения нельзя переписываться, человека находят только по&nbsp;заполненному профилю — поэтому собрать информацию о&nbsp;нём нужно сразу на&nbsp;входе, иначе он останется невидимым.</p>
+            </div>
+
+            <div class="case-text">
+              <h2 class="case-text__title">Решение</h2>
+              <p class="case-text__body">Короткий пошаговый онбординг, который собирает профиль по&nbsp;частям и&nbsp;объясняет, зачем каждое поле.</p>
+            </div>
+
+            <svg
+              class="case-note case-note--notext note-draw"
+              data-draw="view"
+              aria-hidden="true"
+              width="203"
+              height="2"
+              viewBox="0 0 203 2"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0.5 0.5C1.11518 0.5 1.73036 0.5 34.6771 0.592816C67.6237 0.685633 132.883 0.871265 201.769 1.46806" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg
+              class="case-note case-note--notext2 note-draw"
+              data-draw="view"
+              aria-hidden="true"
+              width="65"
+              height="1"
+              viewBox="0 0 65 1"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0.5 0.5C0.695616 0.5 0.891233 0.5 11.3677 0.5C21.8442 0.5 42.5956 0.5 64.5 0.5" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg
+              class="case-note case-note--onboard note-draw"
+              data-draw="view"
+              aria-hidden="true"
+              width="106"
+              height="26"
+              viewBox="0 0 106 26"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M10.0108 24.5796C10.0643 24.5796 10.1179 24.5796 22.3765 24.617C34.6351 24.6544 59.0971 24.7291 74.145 24.3624C94.1141 23.8756 100.259 21.8696 102.339 20.5587C106.394 18.0034 105.15 14.0272 104.988 12.5462C104.384 7.00724 92.9773 2.7557 87.5199 0.901479C86.2478 0.469236 84.9773 0.403934 74.7606 0.619909C64.5439 0.835885 45.3833 1.46094 32.8928 2.0433C15.1479 2.87065 8.76465 4.0088 6.33976 5.15859C2.82974 6.82292 0.949587 9.55466 0.595107 11.3365C-0.0526331 14.5924 2.7285 17.5653 5.28771 20.017C6.72375 20.7596 8.33541 21.3017 10.0114 21.8752C10.8168 22.193 11.5305 22.5651 13.0799 23.7934" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </section>
+
+        <!-- ==================== Секция разбора ==================== -->
+        <section class="case-section" data-reveal-group data-notes-order="x">
+          <div class="case-section__scroll" data-reveal>
+            <div class="case-section__pic">
+              <div class="case-section__screens">
+                <div class="case-section__screen">
+                  <img src="assets/images/contac.png" alt="Нити: список контактов" loading="lazy" />
+                </div>
+                <div class="case-section__screen">
+                  <img src="assets/images/niti1.png" alt="Нити: профиль контакта" loading="lazy" />
+                </div>
+                <div class="case-section__screen">
+                  <img src="assets/images/note.png" alt="Нити: заметка о знакомстве" loading="lazy" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="case-section__block" data-reveal>
+            <div class="case-text">
+              <h2 class="case-text__title">Гипотеза</h2>
+              <p class="case-text__body">После вечера знакомств лица и&nbsp;имена сливаются, и&nbsp;через неделю непонятно, кто есть кто, — если дать записать контекст сразу при&nbsp;добавлении, контакт не&nbsp;потеряет смысл.</p>
+            </div>
+
+            <div class="case-text">
+              <h2 class="case-text__title">Решение</h2>
+              <p class="case-text__body">Возможность оставить короткую заметку прямо в&nbsp;момент знакомства — где пересеклись, о&nbsp;чём говорили, зачем может пригодиться.</p>
+            </div>
+
+            <svg
+              class="case-note case-note--short note-draw"
+              data-draw="view"
+              aria-hidden="true"
+              width="166"
+              height="14"
+              viewBox="0 0 166 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0.5 1.95197C0.5 4.41503 0.806996 10.368 1.75587 12.0501C2.19334 12.8255 3.36521 12.8039 26.5044 12.5189C49.6435 12.234 94.9251 11.5231 122.085 11.2731C149.246 11.0231 156.913 11.2555 160.914 11.0878C164.914 10.9202 165.016 10.3454 165.069 8.52258C165.122 6.69972 165.122 3.64613 165.122 0.5" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg
+              class="case-note case-note--loose note-draw"
+              data-draw="view"
+              aria-hidden="true"
+              width="242"
+              height="11"
+              viewBox="0 0 242 11"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0.5 5.24306C1.47232 4.66622 8.11608 3.52887 17.2084 6.08259C24.1314 8.02703 30.9483 6.09209 35.7601 3.88091C40.1259 1.87469 53.6245 6.53072 66.4314 7.72089C77.1539 8.71736 92.4169 3.21283 109.148 6.33742C121.313 8.60926 126.693 4.488 132.484 2.78091C142.485 -0.166896 148.482 4.30316 157.915 8.45335C160.949 9.78785 164.513 9.87536 169.091 9.41048C177.064 8.60072 181.82 2.72186 192.634 0.5C209.283 2.24544 225.318 6.39743 234.918 3.9101C237.168 3.28157 238.779 3.0065 240.962 2.7231" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </section>
+
+        <!-- ==================== Секция разбора ==================== -->
+        <section class="case-section" data-reveal-group data-notes-order="x">
+          <div class="case-section__scroll" data-reveal>
+            <div class="case-section__pic">
+              <div class="case-section__screens">
+                <div class="case-section__screen">
+                  <img src="assets/images/anoun.png" alt="Нити: лента объявлений" loading="lazy" />
+                </div>
+                <div class="case-section__screen">
+                  <img src="assets/images/anoun2.png" alt="Нити: свои объявления" loading="lazy" />
+                </div>
+                <div class="case-section__screen">
+                  <img src="assets/images/anoun3.png" alt="Нити: отклики" loading="lazy" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="case-section__block" data-reveal>
+            <div class="case-text">
+              <h2 class="case-text__title">Гипотеза</h2>
+              <p class="case-text__body">Студентам нужен простой способ попросить о&nbsp;помощи или&nbsp;найти участников для&nbsp;проекта, не&nbsp;обращаясь к&nbsp;каждому лично.</p>
+            </div>
+
+            <div class="case-text">
+              <h2 class="case-text__title">Решение</h2>
+              <p class="case-text__body">Раздел объявлений, где можно создавать запросы и&nbsp;откликаться на&nbsp;чужие. Добавила отдельные сценарии для&nbsp;авторов и&nbsp;откликнувшихся: просмотр чужих объявлений, управление своими, список собственных откликов.</p>
+            </div>
+
+            <svg
+              class="case-note case-note--section note-draw"
+              data-draw="view"
+              aria-hidden="true"
+              width="189"
+              height="27"
+              viewBox="0 0 189 27"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M25.7125 0.5C20.4782 0.5 8.09889 0.999762 4.73289 3.07231C2.85249 4.23012 1.89739 6.75497 1.02039 9.44774C-0.045557 12.7207 0.77107 15.6491 1.3042 17.4182C2.5036 21.3983 5.90842 22.9581 10.1343 24.7002C12.0369 25.4845 15.2676 26.0012 41.5779 25.8802C67.8881 25.7592 117.261 24.7513 143.861 24.0129C170.462 23.2745 172.794 22.8362 175.072 22.1776C182.919 19.9093 185.936 16.9224 187.489 14.3129C188.196 13.1258 187.839 10.5445 187.597 7.6182C187.496 6.40435 186.959 5.80517 184.518 4.68099C182.077 3.55682 177.625 1.9422 153.023 1.3507C128.421 0.759201 83.8042 1.23974 58.9074 1.78369C34.0106 2.32764 30.1863 2.92043 26.2461 3.53119" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg
+              class="case-note case-note--find note-draw"
+              data-draw="view"
+              aria-hidden="true"
+              width="248"
+              height="9"
+              viewBox="0 0 248 9"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0.5 0.5C0.565098 0.5 0.630196 0.5 41.2824 1.15272C81.9346 1.80544 163.172 3.11089 246.871 4.45589" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M13.3716 6.07275C16.0348 6.07275 18.698 6.07275 54.9629 6.11286C91.2278 6.15296 161.014 6.23317 199.206 6.61277C237.398 6.99237 241.882 7.66892 247.03 8.48222" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg
+              class="case-note case-note--auth note-draw"
+              data-draw="view"
+              aria-hidden="true"
+              width="80"
+              height="3"
+              viewBox="0 0 80 3"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0.5 2.13488C0.532663 2.13488 0.565327 2.13488 13.5067 2.13488C26.4481 2.13488 52.2972 2.13488 78.7965 0.5" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <svg
+              class="case-note case-note--respond note-draw"
+              data-draw="view"
+              aria-hidden="true"
+              width="139"
+              height="2"
+              viewBox="0 0 139 2"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0.5 1.01538C0.599116 1.01538 0.698233 1.01538 23.4154 1.01538C46.1326 1.01538 91.4649 1.01538 138.365 0.5" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </section>
+
+        <!-- ==================== На главную ==================== -->
+        <a class="case-next case-next--home" href="index.html" aria-label="На главную">
+          <svg
+            class="note-draw"
+            data-draw="view"
+            aria-hidden="true"
+            width="269"
+            height="33"
+            viewBox="0 0 269 33"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M0.5 0.232332C0.5 0.170998 0.532645 7.20169 0.629592 18.3418C0.693894 22.4197 0.788862 23.2992 0.837785 24.1929C0.886708 25.0867 0.886708 25.9681 1.07856 26.0729" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M1.10547 13.263C1.27166 13.263 5.81387 13.263 12.589 12.844C14.9407 12.6986 14.9531 11.5872 14.7832 9.60882C14.3464 4.52533 13.7794 0.353758 13.7005 1.23938C13.6701 3.12118 13.6592 7.91115 13.9425 12.289C14.2257 16.6668 14.8035 20.4873 15.5935 25.6316" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M32.7493 6.84843C31.6511 6.22775 28.0737 4.76986 24.5521 5.27093C22.0321 5.62949 21.2149 9.52272 20.3023 12.2296C19.3185 15.1479 20.2074 17.7105 21.1324 19.1521C23.1692 22.3265 30.3555 22.48 35.0032 21.6122C38.9788 20.8698 35.3297 14.1759 34.6193 12.9476C37.2394 17.1758 46.0171 24.8367 51.0052 27.691C51.8278 28.0006 52.7251 28.2855 53.6495 28.579" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M88.331 27.6638C88.3224 26.1468 88.1186 21.7736 85.5555 15.3363C84.8942 13.6753 84.0873 12.6202 84.7006 11.9134C85.3139 11.2065 87.2505 10.9333 90.2259 10.2394C93.2013 9.54558 97.1569 8.43928 102.051 7.22559" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M106.504 25.5329C106.504 22.6243 107.31 12.7531 108.725 8.48047C109.361 9.24029 110.369 11.2787 113.469 15.768C115.879 19.0966 119.988 24.5579 124.222 30.1846" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M136.494 11.0129C136.012 10.4099 133.934 8.77185 131.373 8.18564C129.961 7.86256 128.4 8.61005 127.103 9.59646C125.101 11.1181 125.515 16.6494 126.224 20.6724C126.575 22.664 128.347 23.8287 129.781 24.3722C132.881 25.5469 134.877 23.6757 136.041 22.7381C137.149 21.8455 137.285 18.2455 137.342 14.5095C137.362 13.2256 140.898 21.3777 144.643 25.7376C145.37 26.2493 145.996 26.3619 146.588 26.2675C147.179 26.1732 147.716 25.8684 148.902 24.4486" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M154.706 23.1059C152.841 19.6566 148.497 11.2083 148.33 7.63244C148.293 6.85308 148.875 6.38262 150.004 5.96438C152.905 4.88922 155.743 4.85494 157.071 5.18056C157.675 5.32858 157.797 6.22102 157.685 6.93891C157.449 8.45489 155.516 10.6869 154.13 12.7567C152.924 14.5578 161.204 11.1254 165.283 11.6556C166.768 11.8485 167.589 13.3201 168.005 14.556C168.525 16.1042 166.929 18.3033 165.215 20.2849C163.831 21.4964 161.474 22.1784 158.313 22.5817C156.888 22.7198 155.825 22.7227 154.73 22.7256" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M172.763 3.50879C172.763 4.623 173.208 9.21168 176.806 20.9807C177.366 22.8133 176.969 21.9612 176.689 21.2172C175.65 18.4549 175.202 16.1746 175.617 15.2537C176.038 14.3202 180.368 14.1997 185.202 13.2389C186.827 12.9159 186.541 12.0674 186.209 11.443C184.658 8.52467 183.963 5.6937 184.092 5.8457C184.311 6.56555 184.844 8.5903 185.86 11.1161C186.876 13.6418 188.358 16.6072 189.958 20.1601" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M192.032 3.71924C192.452 4.33297 195.604 7.56578 199.112 10.2501C200.312 11.1681 200.898 10.296 201.341 9.27269C202.354 6.93142 202.93 4.72031 203.264 3.92513C203.135 4.51013 202.311 6.63969 200.879 12.3483C200.083 16.5899 199.147 23.5618 198.174 32.3484" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M209.895 2.9043C209.941 5.15635 211.141 14.1473 211.99 18.5869C212.148 19.4094 211.662 16.1131 211.586 14.8078C211.549 14.1908 211.885 13.6717 212.675 13.3659C214.684 12.5889 216.727 12.7667 217.583 12.1397C218.041 11.8039 217.885 10.8252 217.841 10.7696C216.53 9.12553 218.699 15.7914 220.556 18.0765C221.388 19.0991 222.804 19.5319 224.215 19.8152C225.53 20.0791 226.863 19.4075 228.037 18.4303C230.101 16.7127 230.602 13.8151 230.567 8.35065C230.558 6.94826 229.931 5.93851 229.418 5.22462C228.515 3.9688 226.18 3.69004 223.365 3.73705C221.043 3.77581 219.552 4.78474 218.613 5.55787C218.174 6.00836 217.81 6.57692 217.623 7.69434C217.436 8.81176 217.436 10.4608 217.436 12.1598" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M243.344 10.0854C243.383 10.0854 252.069 10.0854 264.794 9.82334C268.86 9.7396 268.041 9.03718 266.547 8.42554C262.969 6.95989 260.195 6.17068 260.925 6.52349C262.155 7.11838 265.105 8.61355 266.074 9.67561C267.043 10.7377 265.935 11.3356 264.615 11.8824C263.294 12.4292 261.796 12.9067 260.72 13.2728C259.645 13.6389 259.037 13.8791 258.305 14.1266" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </main>
+
+    <!-- ============================ Футер ============================ -->
+    <footer class="site-footer">
+      <div class="container">
+        <div class="site-footer__inner">
+          <a class="site-footer__logo" href="index.html" aria-label="На главную">
+            <span class="site-logo" aria-hidden="true"></span>
+          </a>
+
+          <ul class="site-footer__list">
+            <li>
+              <a class="nav-item nav-item--marked" href="https://t.me/elizlazovik" target="_blank" rel="noopener">
+                <svg
+                  class="nav-item__mark note-draw"
+                  data-draw="hover"
+                  aria-hidden="true"
+                  width="123"
+                  height="40"
+                  viewBox="0 0 123 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M3.63637 10.538C4.21649 10.4017 8.50301 7.90398 19.393 3.44745C23.032 1.95826 28.057 1.40253 33.8879 0.875879C39.7187 0.34923 46.388 0.303296 56.7708 1.21068C67.1535 2.11806 81.0476 3.98015 89.8516 5.37225C98.6555 6.76435 101.948 7.63003 104.576 8.50478C113.488 11.4713 118.567 16.5358 120.506 18.8678C122.219 20.9267 122.299 24.1406 122.498 29.4133C122.559 31.0358 121.374 32.0411 120.366 33.0255C119.572 33.8002 117.41 34.7686 113.41 36.241C108.392 38.0878 104.593 38.5374 92.7431 38.8881C81.5868 39.2182 59.98 39.588 46.0675 39.4813C32.155 39.3746 26.5893 38.7113 22.8493 38.1203C17.316 37.2459 14.5279 36.071 11.6408 34.5613C3.35023 30.2261 2.12076 27.3194 1.03503 24.1674C-0.17787 20.6462 0.958589 15.829 1.6256 14.0404C2.06533 13.2639 2.92264 12.1805 4.06246 11.0127C4.59229 10.5304 5.0235 10.2719 5.73864 9.99953" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="nav-item__title">Telegram</span>
+                <span class="nav-item__sub">Быстрее отвечу тут</span>
+              </a>
+            </li>
+            <li>
+              <a class="nav-item nav-item--mark-link" href="https://www.linkedin.com/in/liza-lazovik-b1993b263/" target="_blank" rel="noopener">
+                <svg
+                  class="nav-item__mark note-draw"
+                  data-draw="hover"
+                  aria-hidden="true"
+                  width="133"
+                  height="46"
+                  viewBox="0 0 133 46"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M36.4094 0.622427C36.4094 0.575415 33.5174 0.574703 26.3319 1.21119C9.50754 2.70145 5.83463 7.17805 2.91684 10.452C0.00587988 13.7184 0.0615632 22.2616 1.31995 27.9721C2.21742 32.0449 6.90088 34.3262 10.0993 36.4723C14.1417 39.1847 21.3471 41.2813 34.873 43.4498C43.8373 44.8869 57.3445 44.869 68.522 44.5822C79.6996 44.2954 88.2095 43.1935 96.9063 41.4007C105.603 39.6078 114.229 37.1573 119.411 35.484C129.032 32.377 131.183 28.1654 132.174 25.9539C132.646 24.9009 132.487 23.5022 132.319 22.0744C131.995 19.3079 128.762 17.473 120.629 13.0113C117.788 11.4531 116.091 10.4517 114.001 9.56795C110.902 8.25732 104.858 6.97497 90.1635 4.97726C79.5445 3.53365 62.3287 2.7173 52.9166 2.00146C42.3726 1.07848 40.1728 0.760012 37.8208 0.600857C36.5024 0.546745 34.9305 0.546745 33.2441 0.5" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="nav-item__title">Linkedin</span>
+                <span class="nav-item__sub">Жесткий нетворкинг</span>
+              </a>
+            </li>
+            <li>
+              <a class="nav-item" href="mailto:elizaveta.lazovik@yandex.ru">
+                <svg
+                  class="nav-item__mark note-draw"
+                  data-draw="hover"
+                  aria-hidden="true"
+                  width="148"
+                  height="41"
+                  viewBox="0 0 148 41"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M6.7831 8.98504C6.87008 8.98504 8.94017 8.91849 19.9211 7.39862C28.9046 6.15521 44.7014 3.10721 58.6601 1.6553C72.6189 0.203393 84.2322 0.223669 94.4958 1.14132C104.759 2.05898 113.321 3.8734 119.201 5.39038C125.081 6.90736 128.02 8.07192 130.65 9.35082C135.614 11.7647 139.735 15.1591 143.124 18.5395C147.36 22.7646 147.426 25.7387 147.499 28.5093C147.549 30.4009 145.434 31.789 143.18 33.4846C141.002 35.1234 137.539 36.3978 130.69 38.0011C125.769 39.1528 117.732 39.9844 102.436 40.3559C87.1406 40.7274 64.7832 40.3562 49.9152 39.5234C35.0471 38.6906 28.3458 37.4075 23.6508 36.2799C16.3962 34.5376 12.7138 32.6229 10.3704 31.2769C5.86055 28.6866 3.18936 24.8035 1.03093 20.5179C0.560246 19.1171 0.426914 17.739 0.535586 16.2717C0.663313 15.6747 0.938401 15.3773 1.92957 15.0489" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="nav-item__title">Email</span>
+                <span class="nav-item__sub">Деловая переписка</span>
+              </a>
+            </li>
+            <li>
+              <a class="nav-item nav-item--mark-resume" href="https://disk.yandex.ru/i/ktdbIUtRWzCJng" target="_blank" rel="noopener">
+                <svg
+                  class="nav-item__mark note-draw"
+                  data-draw="hover"
+                  aria-hidden="true"
+                  width="134"
+                  height="39"
+                  viewBox="0 0 134 39"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M58.3406 1.3491C52.6912 1.2841 38.6303 0.782779 29.76 0.548437C16.9928 0.211144 12.7504 1.66114 7.66135 4.09556C4.30801 5.69968 2.10566 9.30093 0.866415 12.8733C-1.21736 18.8802 6.04768 26.3136 11.3692 30.2112C13.3766 31.6816 15.3969 32.1382 17.6954 32.9055C20.7845 33.9368 27.6804 35.7515 42.0593 37.2525C51.2084 38.2076 64.258 37.8228 76.8798 37.2192C89.5017 36.6157 101.336 35.3621 107.98 34.5911C118.604 33.3584 128.226 26.5477 132.643 22.1371C133.719 21.0635 133.388 18.7634 133.309 16.7045C133.253 15.268 132.347 14.2336 131.462 13.279C128.993 10.6169 119.718 8.8653 110.487 5.39019C106.134 3.75103 102.186 3.11322 95.1012 2.67378C88.016 2.23434 77.8451 2.20405 72.0615 2.10867C65.1898 1.85374 63.2687 1.67605 60.9109 1.63744C59.3531 1.61212 57.0617 1.57519 54.7009 1.53713" stroke="#2F46F5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="nav-item__title">Резюме</span>
+                <span class="nav-item__sub">Скачать бесплатно</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <script src="scripts/main.js"></script>
+    <!-- reveal.js раньше notes.js: он расставляет data-reveal-pending,
+         по которым пометки понимают, что надо дождаться контента -->
+    <script src="scripts/reveal.js"></script>
+    <script src="scripts/notes.js"></script>
+  </body>
+</html>
