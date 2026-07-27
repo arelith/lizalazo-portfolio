@@ -1,0 +1,49 @@
+/* ==========================================================================
+   Переход между страницами — кросс-документные View Transitions.
+
+   Опт-ин нужен на ОБОИХ документах (уходящем и приходящем), поэтому файл
+   подключён на всех страницах. Где API не поддержан (Firefox и старые
+   браузеры) — переход просто не проигрывается, навигация обычная.
+
+   Эффект перекликается с проявлением контента (reveal): уходящая страница
+   гаснет, приходящая проявляется снизу вверх.
+   ========================================================================== */
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: var(--page-transition-duration);
+  animation-timing-function: var(--reveal-ease);
+  animation-fill-mode: both;
+}
+
+@keyframes page-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+::view-transition-old(root) {
+  animation-name: page-out;
+}
+
+::view-transition-new(root) {
+  animation-name: page-in;
+}
+
+/* «Уменьшить движение» — оставляем мгновенную смену без анимации */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}

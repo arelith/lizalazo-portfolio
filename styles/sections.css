@@ -107,6 +107,10 @@
   rotate: var(--note-rotate);
   pointer-events: none;
   user-select: none;
+  /* До ширины из макета (66px); высота — по пропорции файла (50×43),
+     чтобы рисунок не растянулся. Общий размер для десктопа и мобилы. */
+  width: 66px;
+  height: auto;
 }
 
 /* ============================ Cases ============================ */
@@ -370,7 +374,7 @@
     --hero-offset-top: 31px;
     --hero-text-gap: var(--space-16);
     --hero-underline-left: 133px;
-    --hero-underline-top: 81px;
+    --hero-underline-top: 79px;   /* на 2px выше — как в мобильном макете */
     --section-gap: 60px;
     --section-content-gap: var(--space-24);
     --cases-gap: var(--space-32);
@@ -391,7 +395,7 @@
     --collage-offset: var(--space-32);
 
     /* Обо мне и футер */
-    --about-note-left: 83.38%;   /* 286 из 343 в мобильном макете */
+    --about-note-left: calc(83.38% - 4px);   /* 286 из 343 в мобильном макете, минус 4px влево */
     --about-note-top: 94px;
     --footer-gap: 60px;
     --footer-padding-bottom: 46px;
@@ -601,7 +605,8 @@
   .hero__note {
     top: 1px;
     left: auto;
-    right: 14px;
+    right: 10px;   /* на 4px правее */
+    /* размер — общий, задан в базовом правиле .hero__note */
   }
 }
 

@@ -11,7 +11,7 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url("../assets/fonts/IBMPlexMono-Regular.woff2") format("woff2");
+  src: url("../assets/fonts/ibmplexmono-regular.woff2") format("woff2");
 }
 
 @font-face {
@@ -19,7 +19,7 @@
   font-style: normal;
   font-weight: 600;
   font-display: swap;
-  src: url("../assets/fonts/IBMPlexMono-SemiBold.woff2") format("woff2");
+  src: url("../assets/fonts/ibmplexmono-semibold.woff2") format("woff2");
 }
 
 :root {
@@ -152,11 +152,11 @@
   --hero-underline-left: 251px;
   --hero-underline-top: 49px;
 
-  /* Пометка «упрощаю людям жизнь».
-     Файл upro.svg уже́ 50×43 против макетных 66×44, поэтому позиция
-     посчитана так, чтобы совпал центр пометки из макета. */
-  --hero-note-left: 430px;
-  --hero-note-top: -30px;
+  /* Пометка «упрощаю людям жизнь». Отрисована в размер макета (ширина 66px,
+     см. .hero__note). Позиция сохраняет центр из макета — тот же, что и при
+     прежнем размере 50×43 (было left 430 / top -30 при центре 455 / -8.5). */
+  --hero-note-left: 422px;
+  --hero-note-top: -37px;
 
   /* Рукописные SVG-пометки: наклон задаётся здесь, не в файле */
   --note-rotate: -6deg;
@@ -264,6 +264,9 @@
 
   --transition-fast: 120ms ease;
   --transition-base: 200ms ease;
+
+  /* Переход между страницами (View Transitions) */
+  --page-transition-duration: 0.4s;
 
   --focus-ring: 2px solid var(--color-focus);
   --focus-offset: 2px;
