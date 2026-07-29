@@ -8,14 +8,21 @@
    контент остаётся видимым. Тайминги — в токенах (--reveal-*).
    ========================================================================== */
 (function initReveal() {
+  // Предохранитель от мигания: <head> пометил <html> классом reveal-init,
+  // и до нас контент уже спрятан из CSS. Снимаем класс, как только сами
+  // расставим скрытие (или если прятать нечего) — иначе контент застрянет.
+  const disarm = () =>
+    document.documentElement.classList.remove("reveal-init");
+
   const groups = [...document.querySelectorAll("[data-reveal-group]")];
   const singles = [...document.querySelectorAll("[data-reveal]")].filter(
     (el) => !el.closest("[data-reveal-group]")
   );
-  if (!groups.length && !singles.length) return;
+  if (!groups.length && !singles.length) return disarm();
 
   // При «уменьшить движение» ничего не прячем — контент просто виден
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+    return disarm();
 
   const seconds = (value) => {
     const n = parseFloat(value);
@@ -76,6 +83,10 @@
     hide(el);
     targets.push({ trigger: el, items: [el] });
   });
+
+  // Всё спрятано через .is-hidden — снимаем предохранитель. Дальше скрытием
+  // управляет .is-hidden, лишнего показа (мигания) уже не будет.
+  disarm();
 
   /* Один раз при появлении. Элементы первого экрана сработают сразу:
      IntersectionObserver отдаёт их в первом же колбэке, скролл не нужен. */

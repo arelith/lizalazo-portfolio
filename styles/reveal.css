@@ -19,6 +19,23 @@
   transform: translateY(var(--reveal-shift));
 }
 
+/* До запуска reveal.js прячем контент заранее — ещё до первой отрисовки.
+   Иначе он успевает прокраситься видимым, JS его прячет, и при переходах
+   между страницами это читается как мигание. Класс reveal-init ставит
+   встроенный скрипт в <head>; reveal.js снимает его, расставив .is-hidden.
+   Класс есть только при работающем JS — без него контент виден. */
+html.reveal-init [data-reveal] {
+  opacity: 0;
+  transform: translateY(var(--reveal-shift));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.reveal-init [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Уважаем «уменьшить движение»: ничего не двигаем и не прячем.
    JS при этой настройке класс вообще не вешает — правило страхует
    случай, когда настройку меняют уже после загрузки. */

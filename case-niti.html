@@ -3,6 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Прячем проявляемый контент (reveal) до первой отрисовки: иначе он
+         успевает показаться, потом JS его прячет — и при переходах это мигает.
+         reveal.js снимает класс, расставив своё состояние. Нет JS — класс не
+         ставится, контент виден (грациозная деградация). -->
+    <script>
+      var de = document.documentElement;
+      de.classList.add("reveal-init");
+      // Страховка: если reveal.js не отработает — не оставляем контент скрытым.
+      addEventListener("load", function () {
+        de.classList.remove("reveal-init");
+      });
+    </script>
     <title>Нити — кейс · Лиза Лазовик</title>
     <meta
       name="description"

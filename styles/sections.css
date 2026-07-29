@@ -113,6 +113,59 @@
   height: auto;
 }
 
+/* ---------------- Большое «сердце»-росчерк из макета ----------------
+   Тонкая синяя линия справа в первом экране. Рисуется снизу вверх (как
+   пометки), затем стирается тем же движением, цикл повторяется.
+   Позиция — из макета, относительно .hero. overflow: visible, потому что
+   верхний завиток выходит за viewBox экспортированного файла. */
+.hero-heart {
+  position: absolute;
+  z-index: -1;                 /* за текстом хиро */
+  left: 599px;
+  top: -120px;
+  width: 514px;                /* = viewBox, масштаб 1:1 к макету */
+  height: auto;
+  max-width: none;             /* иначе глобальный reset svg{max-width:100%} сожмёт */
+  overflow: visible;
+  pointer-events: none;
+  user-select: none;
+}
+
+.hero-heart path {
+  stroke-dasharray: 1;         /* path имеет pathLength="1" */
+  stroke-dashoffset: 1;        /* спрятана, пока не «нарисуется» */
+  /* один раз: нарисовалась, стёрлась и больше не появляется.
+     linear — равномерная скорость на всём рисовании и стирании. */
+  animation: hero-heart-draw var(--hero-heart-duration) linear
+    var(--hero-heart-delay) 1;
+}
+
+@keyframes hero-heart-draw {
+  0% {
+    stroke-dashoffset: 1;      /* пусто */
+  }
+  40% {
+    stroke-dashoffset: 0;      /* нарисована целиком */
+  }
+  55% {
+    stroke-dashoffset: 0;      /* пауза с полной линией */
+  }
+  95% {
+    stroke-dashoffset: -1;     /* стёрлась тем же движением */
+  }
+  100% {
+    stroke-dashoffset: -1;     /* пусто — стык с началом цикла бесшовный */
+  }
+}
+
+/* «Уменьшить движение» — показываем сердце статично, нарисованным целиком */
+@media (prefers-reduced-motion: reduce) {
+  .hero-heart path {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+}
+
 /* ============================ Cases ============================ */
 .section {
   margin-top: var(--section-gap);
@@ -309,10 +362,17 @@
 
 /* Рукописная пометка внутри абзаца — декор.
    Координаты из макета, наклон и позиция только в CSS. */
+/* Слово-якорь для пометки: «воина». Пометка позиционируется относительно
+   него, а не абзаца, поэтому не уезжает при переносе строк на разных ширинах. */
+.about-word {
+  position: relative;
+}
+
 .about__note {
   position: absolute;
-  left: var(--about-note-left);
-  top: var(--about-note-top);
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;        /* поверх слова, по центру — зачёркивает */
   rotate: var(--about-note-rotate);
   pointer-events: none;
   user-select: none;
@@ -395,8 +455,6 @@
     --collage-offset: var(--space-32);
 
     /* Обо мне и футер */
-    --about-note-left: calc(83.38% - 4px);   /* 286 из 343 в мобильном макете, минус 4px влево */
-    --about-note-top: 94px;
     --footer-gap: 60px;
     --footer-padding-bottom: 46px;
   }
@@ -607,6 +665,11 @@
     left: auto;
     right: 10px;   /* на 4px правее */
     /* размер — общий, задан в базовом правиле .hero__note */
+  }
+
+  /* На мобиле первый экран плотный — большое сердце убираем */
+  .hero-heart {
+    display: none;
   }
 }
 
